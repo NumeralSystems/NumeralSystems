@@ -1,0 +1,8 @@
+{
+    "Nto10": [
+        { "language": "Python", "content": "111\n222" }
+    ],
+    "10toN": [
+        {}
+    ]
+}
