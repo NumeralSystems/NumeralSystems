@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="style.css">
     <link href="assets/materialIconsStylesheet.css" rel="stylesheet">
 </head>
-<body class="showIEWarning bodyState_introNotDone explNotUsed">
+<body class="showIEWarning">
     <script>if (!document.documentMode) document.body.classList.remove('showIEWarning');</script>
     <div id="ieWarning">
         <div id="ieWarning_background"></div>
@@ -40,7 +40,6 @@
     <div id="loadShield">
         <div id="loadShield_spinner"></div>
     </div>
-    <button class="navButton" id="auxBackButton"><icon>navigate_before</icon><span>Вернуться назад</span></button>
     <button class="navButton" id="navOpenButton"><icon>III</icon><span>Содержание</span></button>
     <div id="navbar">
         <div id="navbar_header">
@@ -51,15 +50,13 @@
             <div id="navbar_progress_text">0% пройдено</div>
             <progress id="navbar_progress_bar" value="0.25"></progress>
         </div>
-        <div id="navbar_feedbackContainer">
-            <div id="navbar_feedbackButton" onclick="window.open('https:\/\/forms.gle\/fyp9MyRiXenCFtS56', '_blank').focus();">Возникли проблемы?</div>
-        </div>
         <div id="navbar_links"></div>
     </div>
     <img id="imageCloseup"></img>
     <div id="imageCloseupShadow"></div>
     <div id="navShadow"></div>
-    <page id="titleScreen">
+    <page id="titleScreen" pagetitle="Приветствие">
+        <div id="titleScreen_savedPositionContainer" class="displaynone">Вы остановились на другой странице. Перейти туда?</div>
         <div class="titleScreen_backgroundGradient" id="titleScreen_backgroundGradient_1"></div>
         <div class="titleScreen_marqueeGroup titleScreen_marqueeGroup_top"></div>
         <div class="titleScreen_marqueeGroup titleScreen_marqueeGroup_bottom"></div>
@@ -74,20 +71,23 @@
             </div>
         </div>
     </page>
-    <page intitle="История 1" class="pageState_introNotDone" id="page_unary">
+    <page pagetitle="История" class="pageState_introNotDone" id="page_unary">
         <section>
-            <div class="pageBackgroundLayer">
+            <div class="backgroundLayer">
                 <div class="backgroundFeatureImage">
                     <img src="assets/edin.svg" alt="">
                 </div>
             </div>
             <div class="pageTextContent">
-                <h1 class="chapterTitle" style="text-shadow: 0 4px 16px #0004;">История</h1>
+                <h1 style="text-shadow: 0 4px 16px #0004;">История</h1>
                 <div class="textBlock">
                     Древние люди жили в разных местах. Они были не так едины, как современные, но их связывала необходимость что-либо считать. Например, скот, кирпичи, количество урожая.
                 </div>
                 <div class="textBlock">
                     Сначала человек использовал единичную систему счисления. Для этого он загибал пальцы ног и рук, рисовал черточки на земле, камнях, древесной коре и подобным вещам, которые тогда служили людям “бумагой”.
+                </div>
+                <div class="textBlock">
+                    Данная система используется при обучении детей счёту, и в этом деле важную роль играют счётные палочки.
                 </div>
             </div>
             <div class="pageMediaContent">
@@ -101,57 +101,40 @@
             </div>
         </section>
         <section>
-            <div class="pageBackgroundLayer">
+            <div class="backgroundLayer">
                 <div class="backgroundFeatureImage">
                     <img src="assets/edin2.svg" alt="">
                 </div>
             </div>
             <div class="pageTextContent">
                 <div class="textBlock">
-                    Это была единичная, или <def>унарная система счисления</def>, в которой присутствовала лишь одна цифра — 1. Например, число 8 записывалось как 11111111 (восемь единиц).
+                    В единичной, или <def>унарной системе счисления</def>, присутствовала лишь одна цифра — 1. Например, число 8 записывалось как 11111111 (восемь единиц).
                 </div>
                 <div class="textBlock">
                     Но такая система была неудобной, когда в жизнь пришли большие числа, ведь чем больше число, тем больше приходилось добавлять единиц, и тем труднее становилось считать.
                 </div>
-                <div class="goToCard" onclick="goToPage('+')">
-                    <div class="goToCardText">Определения</div>
-                    <div class="goToCardIconContainer">
-                        <div class="goToCardIconBackground">
-
-                        </div>
-                        <div class="goToCardIconSymbol">
-                            <icon>navigate_next</icon>
-                        </div>
-                    </div>
-                </div>
+                <div class="goToCard" data-label="Определения"></div>
             </div>
             <div class="pageMediaContent">
                 <div class="mediaContainer" id="mediaContent_unary2_container">
                     <input id="mediaContent_unary2_input" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="5">
-                    <div id="mediaContent_unary2_buttonContainer" class="roundButtonStrip">
-                        <button>1</button>
-                        <button>50</button>
-                        <button>100</button>
-                        <button>1000</button>
-                        <button>2000</button>
-                        <button>10000</button>
-                        <button>50000</button>
-                    </div>
+                    <div id="mediaContent_unary2_buttonContainer" class="roundButtonStrip"></div>
                     <div id="mediaContent_unary2_result"></div>
                 </div>
             </div>
         </section>
     </page>
-    <page intitle="Определения" id="page_definitions">
+    <page pagetitle="Определения" id="page_definitions">
         <section>
-            <div class="pageBackgroundLayer">
+            <div class="backgroundLayer">
             </div>
             <div class="pageTextContent pageTextContentHalf">
+                <h1>Определения</h1>
                 <div class="textBlock">
-                    Для упрощения подсчета предметы стали объединять в небольшие группы по 3, 5 и 10 единиц. При этом каждой группе соответствовал свой знак-обозначение на письме. Поскольку самым удобным счетом всегда был счет на пальцах, то первыми свое обозначение получили объединения предметов из 10 и 5 единиц.
+                    Для упрощения подсчета предметы стали объединять в небольшие группы по 3, 5 и 10 единиц. При этом каждой группе соответствовал свой знак-обозначение на письме. Поскольку самым удобным счетом всегда был счет на пальцах, то первыми своё обозначение получили объединения предметов из 10 и 5 единиц.
                 </div>
                 <div class="textBlock">
-                    Именно это положило начало удобным системам счисления.
+                    Именно это положило начало удобным для человека системам счисления.
                 </div>
             </div>
             <div class="pageTextContent pageTextContentHalf">
@@ -161,7 +144,7 @@
             </div>
         </section>
         <section>
-            <div class="pageBackgroundLayer">
+            <div class="backgroundLayer">
             </div>
             <div class="pageTextContent pageTextContentHalf">
                 <div class="textBlock">
@@ -187,54 +170,54 @@
             </div>
         </section>
         <section>
-            <div class="pageBackgroundLayer">
+            <div class="backgroundLayer">
             </div>
             <div class="pageTextContent">
                 <div class="textBlock">
                     Все системы счисления можно разделить на две группы: позиционные и непозиционные.
                 </div>
                 <div class="textBlock">
-                    В непозиционных системах положение цифры в числе не влияет на её величину.
+                    В непозиционных системах положение цифры в числе не влияет на её величину. К таким относится уже знакомая Вам унарная система счисления, где каждая цифра независимо от позиции обозначает число 1.
                 </div>
                 <div class="textBlock">
                     В позиционных системах счисления вес цифры меняется с изменением её положения в числе. По сравнению с непозиционными они считаются более совершенными. В числе таких систем — привычная нам десятичная система счисления, используемые в информатике двоичная, восьмеричная, шестнадцатеричная, а также другие системы.
                 </div>
-                <div class="goToCard" onclick="goToPage('+')">
-                    <div class="goToCardText">Примеры систем счисления</div>
-                    <div class="goToCardIconContainer">
-                        <div class="goToCardIconBackground">
-    
-                        </div>
-                        <div class="goToCardIconSymbol">
-                            <icon>navigate_next</icon>
-                        </div>
-                    </div>
-                </div>
+                <div class="goToCard" data-label="Исторические системы счисления"></div>
+            </div>
+            <div class="pageMediaContent" id="mediaContent_positioning">
+                <div>111<sub>1</sub></div>
+                <div id="mediaContent_positioning_notEquals">≠</div>
+                <div>111<sub>10</sub></div>
             </div>
         </section>
     </page>
-    <page intitle="Древнеегипетская система" id="page_historyExamples">
+    <page pagetitle="Исторические системы счисления" id="page_historyExamples">
         <section id="historyExamples_egypt">
-            <div class="pageBackgroundLayer">
+            <div class="backgroundLayer">
             </div>
             <div class="pageTextContent">
+                <h1>Древнеегипетская система</h1>
                 <div class="textBlock">
                     Одной из древнейших системы является древнеегипетская система счисления (или просто египетская система счисления), которая появилась в Египте примерно в III веке до н. э. использовалась до начала X века н. э.
                 </div>
                 <div class="textBlock">
                     Это непозиционная десятичная система, которая использовала иероглифы как цифры, обозначающие числа, являющиеся различными степенями 10: например, число 100 обозначалось знаком, напоминающим петлю веревки, а 1000 — иероглифом, который можно интерпретировать как изображение лотоса или кувшинки.
                 </div>
-                <div class="accentBlock">
+                <div class="textBlock">
                     Фиксированного направления записи чисел не было. Они могли записываться слева направо, наоборот и даже вертикально. Числа, не являющиеся степенью 10, записывались путём повторения цифр. Каждая цифра могла повторяться от 1 до 9 раз.
                 </div>
             </div>
+            <div class="pageMediaContent">
+                <div id="mediaContent_egyptDigits" class="mediaContent_history_digitCards"></div>
+            </div>
         </section>
-        <section>
-            <div class="pageBackgroundLayer">
+        <section id="historyExamples_rome">
+            <div class="backgroundLayer">
             </div>
             <div class="pageTextContent">
+                <h1>Римская система</h1>
                 <div class="textBlock">
-                    Римская система счисления — непозиционная система счисления, использующая для записи чисел буквы латинского алфавита. Цифра 1 обозначалась как I, цифра 5 — как V, 10 — X и так далее. Для записи чисел использовалось два правила:
+                    Римская система счисления — непозиционная система счисления, использующая для записи чисел буквы латинского алфавита. Цифра 1 обозначалась как I, цифра 5 — как V, 10 — X и так далее. Хоть эта система и считается непозиционной, для записи чисел используется два правила:
                 </div>
                 <div class="textBlock">
                     <ul>
@@ -242,68 +225,70 @@
                         <li>каждый меньший знак, поставленный справа от большего, прибавляется к нему.</li>
                     </ul>
                 </div>
-                <div class="accentBlock">
+                <div class="textBlock">
+                    Римляне не были склонны заниматься математикой по сравнению, например, с греками, и в связи с этим записывать большие числа в этой системе довольно неудобно.
+                </div>
+                <div class="textBlock">
                     Несмотря на то, что эта система появилась ещё в древнем Риме, она используется по сей день для обозначения номеров тысячелетий и веков, порядковых номеров монархов и глав в книгах, в маркировке циферблатов на часах.
                 </div>
             </div>
+            <div class="pageMediaContent">
+                <div id="mediaContent_romeDigits" class="mediaContent_history_digitCards"></div>
+            </div>
         </section>
-        <section>
-            <div class="pageBackgroundLayer">
+        <section id="historyExamples_base60">
+            <div class="backgroundLayer">
             </div>
             <div class="pageTextContent">
+                <h1>Шестидесятеричная система</h1>
                 <div class="textBlock">
-                    К слову, о времени. Мы представляем время в шестидесятеричной системе счисления с основанием 60. Это первая позиционная система, и она была придумана шумерами в III тысячелетии до н.э. На сегодняшний день эту систему счисления применяют при измерении, как уже говорилось выше, времени, а также углов. В этой системе счисления также можно записывать не только натуральные, но и вещественные числа. Первый знак после запятой называется минута (‘), второй - секунда (“)
+                    К слову, о времени. Мы представляем время в шестидесятеричной системе счисления с основанием 60. Это первая позиционная система, и она была придумана шумерами в III тысячелетии до н.э.
                 </div>
+                <div class="textBlock">
+                    На сегодняшний день эту систему счисления применяют при измерении, как уже говорилось выше, времени, а также углов. В этой системе счисления также можно записывать не только натуральные, но и вещественные числа. Первый знак после запятой называется минута (‘), второй - секунда (“).
+                </div>
+                <div class="textBlock">
+                    Однако можно заметить, что величины углов и время записываются с использованием алфавита десятичной системы.
+                </div>
+                <div class="goToCard" data-label="СС в информатике"></div>
             </div>
             <div class="pageMediaContent">
-                <div class="mediaContainer" id="mediaContent_base60_container">
+                <div class="mediaContainer canReveal" id="mediaContent_base60_container">
                     <div id="mediaContent_base60_textContainer">
-                        <div class="mediaContent_base60_textRow">
-                            <div id="mediaContent_base60_textSecondsTime"></div>
-                            <div id="mediaContent_base60_textSecondsDegrees"></div>
-                        </div>
                         <div class="mediaContent_base60_textRow">
                             <div id="mediaContent_base60_textMinutesTime"></div>
                             <div id="mediaContent_base60_textMinutesDegrees"></div>
                         </div>
                         <div class="mediaContent_base60_textRow">
-                            <div id="mediaContent_base60_textHoursTime"></div>
-                            <div id="mediaContent_base60_textHoursDegrees"></div>
+                            <div id="mediaContent_base60_textSecondsTime"></div>
+                            <div id="mediaContent_base60_textSecondsDegrees"></div>
+                        </div>
+                        <div class="mediaContent_base60_textRow">
+                            <div id="mediaContent_base60_textMillisTime"></div>
+                            <div id="mediaContent_base60_textMillisDegrees"></div>
                         </div>
                     </div>
-                    <div id="mediaContent_base60_circleSeconds" class="mediaContent_base60_circle">
-                        <div id="mediaContent_base60_gradientSeconds" class="mediaContent_base60_gradient"></div>
-                    </div>
-                    <div id="mediaContent_base60_circleMinutes" class="mediaContent_base60_circle">
-                        <div id="mediaContent_base60_gradientMinutes" class="mediaContent_base60_gradient"></div>
-                    </div>
-                    <div id="mediaContent_base60_circleHours" class="mediaContent_base60_circle">
-                        <div id="mediaContent_base60_gradientHours" class="mediaContent_base60_gradient"></div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <section>
-            <div class="pageBackgroundLayer">
-            </div>
-            <div class="pageTextContent">
-                <div class="goToCard" onclick="goToPage('+')">
-                    <div class="goToCardText">СС в информатике</div>
-                    <div class="goToCardIconContainer">
-                        <div class="goToCardIconBackground"></div>
-                        <div class="goToCardIconSymbol">
-                            <icon>navigate_next</icon>
+                    <div id="mediaContent_base60_circlesContainer">
+                        <div id="mediaContent_base60_circleMillis" class="mediaContent_base60_circle">
+                            <div id="mediaContent_base60_gradientMillis" class="mediaContent_base60_gradient"></div>
+                        </div>
+                        <div id="mediaContent_base60_circleSeconds" class="mediaContent_base60_circle">
+                            <div id="mediaContent_base60_gradientSeconds" class="mediaContent_base60_gradient"></div>
+                        </div>
+                        <div id="mediaContent_base60_circleMinutes" class="mediaContent_base60_circle">
+                            <div id="mediaContent_base60_gradientMinutes" class="mediaContent_base60_gradient"></div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
     </page>
-    <page intitle="СС в информатике" id="page_computerExamples">
+    <page pagetitle="СС в информатике" id="page_computerExamples">
         <section>
-            <div class="pageBackgroundLayer">
+            <div class="backgroundLayer">
             </div>
             <div class="pageTextContent">
+                <h1>Системы счисления в информатике</h1>
                 <div class="textBlock">
                     В информатике чаще всего применяется двоичная система счисления. Одна из причин — тот факт, что для её использования нужно лишь два состояния: чаще всего это “есть напряжение” как 1 и “нет напряжения” как 0. Также это можно понимать как “истина” или “ложь”, поэтому возможно применения аппарата булевой алгебры. Кроме того, представление информации посредством только двух состояний надёжно и устойчиво к помехам, а для машин двоичная арифметика проще десятичной. Минусом лишь является слишком большое количество разрядов для записи больших чисел.
                 </div>
@@ -311,45 +296,94 @@
                     Можно привести примеры записи чисел от 1 до 10 в двоичной системе:
                 </div>
                 <table id="table_Base10toBase2"></table>
-                <div class="textBlock">
-                    Ранее особую популярность в среде разработки программного обеспечения имела восьмеричная система счисления. В частности, такая система была удобна при работе с 6-битной, 12-битной, 18-битной и 24-битной архитектурами, поскольку 6, 12, 18 и 24 делятся на три, и каждая восьмеричная цифра могла представлять три двоичные цифры.
-                </div>
-                <table id="table_Base10toBase8"></table>
-                <div class="textBlock">
-                    Однако позже восьмеричная система была вытеснена шестнадцатеричной из-за роста популярности 8-битных, 16-битных и 32-битных компьютеров.
-                </div>
-                <table id="table_Base10toBase8"></table>
-                <div class="textBlock">
-                    Однако позже восьмеричная система была вытеснена шестнадцатеричной из-за роста популярности 8-битных, 16-битных и 32-битных компьютеров.
+            </div>
+            <div class="pageMediaContent">
+                <div class="mediaContainer" id="mediaContent_computerExamples_binaryContainer">
+                    <div class="mediaContent_computerExamples_binaryRow">
+                        <div id="mediaContent_computerExamples_binaryAsDecimal"></div><sub>10</sub>
+                    </div>
+                    <div class="mediaContent_computerExamples_binaryRow">
+                        <div id="mediaContent_computerExamples_binaryEquals">=</div>
+                    </div>
+                    <div class="mediaContent_computerExamples_binaryRow">
+                        <div id="mediaContent_computerExamples_binaryTable"></div><sub>2</sub>
+                    </div>
+                    <div class="mediaContent_computerExamples_binaryRow">
+                        <div id="mediaContent_computerExamples_binaryPowerTable"></div>
+                    </div>
                 </div>
             </div>
         </section>
         <section>
-            <div class="pageBackgroundLayer">
+            <div class="backgroundLayer">
             </div>
             <div class="pageTextContent">
-                <div class="goToCard" onclick="goToPage('+')">
-                    <div class="goToCardText">Перевод</div>
-                    <div class="goToCardIconContainer">
-                        <div class="goToCardIconBackground"></div>
-                        <div class="goToCardIconSymbol">
-                            <icon>navigate_next</icon>
-                        </div>
+                <div class="textBlock">
+                    Ранее особую популярность в среде разработки программного обеспечения имела восьмеричная система счисления. В частности, такая система была удобна при работе с 6-битной, 12-битной, 18-битной и 24-битной архитектурами, поскольку 6, 12, 18 и 24 делятся на три, и каждая восьмеричная цифра могла представлять три двоичные цифры.
+                </div>
+                <table id="table_Base10toBase8"></table>
+            </div>
+            <div class="pageMediaContent">
+                <div class="mediaContainer canReveal" id="mediaContent_computerExamples_octal">
+                    <div>101</div>
+                    <div>111</div>
+                    <div>001</div>
+                    <div>101</div>
+                    <div>010</div>
+                </div>
+            </div>
+        </section>
+        <section>
+            <div class="backgroundLayer">
+            </div>
+            <div class="pageTextContent">
+                <div class="textBlock">
+                    Однако позже восьмеричная система была вытеснена шестнадцатеричной из-за роста популярности 8-битных, 16-битных и 32-битных компьютеров. В настоящее время программисты широко используют данную систему счисления, поскольку она позволет представлять большие двоичные числа в форме, которую человек может легко прочитать.
+                </div>
+                <div class="textBlock">
+                    1 байт состоит из 8 бит, и может иметь значения от 00000000<sub>2</sub> до 11111111<sub>2</sub>. Эти числа можно представить в шестнадцатеричной системе как 00<sub>16</sub> и FF<sub>16</sub>.
+                </div>
+                <div class="textBlock">
+                    Помимо программистов, эту систему также используют и дизайнеры, когда работают с цветом. Цвет можно представить в виде смешения трёх цветов - красного, зелёного и синего. Поэтому крайне часто используется запись вида #RRGGBB, где RR, GG и BB - числа, представляющие интенсивность красного (Red), зелёного (Green) и синего (Blue), которые варьируются от 0 до 255 в десятичной системе или от 00<sub>16</sub> до FF<sub>16</sub> в шестнадцатеричной.
+                </div>
+                <table id="table_Base10toBase16"></table>
+                <div class="goToCard" data-label="Перевод"></div>
+            </div>
+            <div class="pageMediaContent">
+                <div class="mediaContainer" id="mediaContent_computerExamples_hexadecimalColorContainer">
+                    <div id="mediaContent_computerExamples_hexadecimalColorPresentation"></div>
+                    <div id="mediaContent_computerExamples_hexadecimalColorText">
+                        #
+                        <div id="mediaContent_computerExamples_hexadecimalColorText_red"></div>
+                        <div id="mediaContent_computerExamples_hexadecimalColorText_green"></div>
+                        <div id="mediaContent_computerExamples_hexadecimalColorText_blue"></div>
+                    </div>
+                    <div class="mediaContent_computerExamples_hexadecimalColorRow">
+                        <div>Красный</div>
+                        <input type="range" min="0" max="255" value="100" class="mediaContent_computerExamples_hexadecimalColorSlider" id="mediaContent_computerExamples_hexadecimalColorSlider_red">
+                    </div>
+                    <div class="mediaContent_computerExamples_hexadecimalColorRow">
+                        <div>Зелёный</div>
+                        <input type="range" min="0" max="255" value="160" class="mediaContent_computerExamples_hexadecimalColorSlider" id="mediaContent_computerExamples_hexadecimalColorSlider_green">
+                    </div>
+                    <div class="mediaContent_computerExamples_hexadecimalColorRow">
+                        <div>Синий</div>
+                        <input type="range" min="0" max="255" value="120" class="mediaContent_computerExamples_hexadecimalColorSlider" id="mediaContent_computerExamples_hexadecimalColorSlider_blue">
                     </div>
                 </div>
             </div>
         </section>
     </page>
-    <page intitle="Перевод" id="page_convert">
+    <page pagetitle="Перевод" id="page_convert">
         <section>
-            <div class="pageBackgroundLayer">
+            <div class="backgroundLayer">
             </div>
             <div class="pageTextContent">
                 <div class="textBlock">
-                    Для того, чтобы перевести число из любой системы счисления в десятичную, нужно записать его в виде многочлена, члены которого - 
+                    Для того, чтобы перевести число из любой системы счисления в десятичную, нужно записать его в виде многочлена, члены которого имеют вид: (десятичное значение цифры) × основание<sup>позиция разряда</sup>.
                 </div>
                 <div class="textBlock">
-                    Отсчёт разрядов начинается с нуля, то есть степень цифры
+                    Отсчёт разрядов начинается с нуля, то есть степень основания для цифры, стоящей справа - 0.
                 </div>
                 <div class="textBlock">
                     Для большей наглядности, справа приведены примеры перевода шестнадцетеричного числа 1d7e и двоичного числа 10101 в десятичную систему счисления.
@@ -361,7 +395,7 @@
             </div>
         </section>
         <section>
-            <div class="pageBackgroundLayer">
+            <div class="backgroundLayer">
             </div>
             <div class="pageTextContent">
                 <div class="textBlock">
@@ -373,70 +407,81 @@
                 </div>
             </div>
         </section>
-        <section id="section_convertCalculator">
-            <!-- КАЛЬКУЛЯТОР ТИПА ГУГЛ ПЕРЕВОДЧИКА? -->
-            <div class="pageBackgroundLayer">
+        <section class="verticalSection" id="section_convertCalculator">
+            <div class="backgroundLayer">
             </div>
             <div class="pageMediaContent">
-                <div class="mediaContainer" id="mediaContent_convert_container">
+                <div class="mediaContainer calculatorContainer" id="mediaContent_convert_container">
                 </div>
             </div>
-            <!--<div class="pageTextContent">
-                <div class="goToCard" onclick="goToPage('+')">
-                    <div class="goToCardText">Арифметика</div>
-                    <div class="goToCardIconContainer">
-                        <div class="goToCardIconBackground"></div>
-                        <div class="goToCardIconSymbol">
-                            <icon>navigate_next</icon>
-                        </div>
-                    </div>
-                </div>
-            </div>-->
+            <div class="pageBottomContent">
+                <div class="textBlock">Это калькулятор, позволяющий переводить числа из одной системы счисления в другую. Допустимые основания - от 2 до 36. Вводите число, и внизу автоматически будет показываться пошаговое решение.</div>
+                <div class="goToCard" data-label="Цифровые весы"></div>
+            </div>
         </section>
     </page>
-    <page intitle="Арифметика" id="page_arithmetic">
+    <page pagetitle="Цифровые весы" id="page_scales">
+        <section class="verticalSection" id="section_scalesMain">
+            <div class="backgroundLayer">
+            </div>
+            <div class="pageMediaContent">
+                <div class="mediaContainer" id="mediaContent_scales_container">
+                    <div id="mediaContent_scales_topText"></div>
+                    <div id="mediaContent_scales_deltaIndicator"></div>
+                    <div id="mediaContent_scales_leftContainer"></div>
+                    <div id="mediaContent_scales_rightContainer"></div>
+                    <div id="mediaContent_scales_bottomTable"></div>
+                </div>
+            </div>
+            <div class="pageBottomContent">
+                <div class="textBlock">Перевод чисел можно представить себе как весы, на левой чаше которых - исходное число, а на правой - гирьки. Попробуйте перетащить гирьки в слоты ниже и уравновесить эти весы.</div>
+                <div class="goToCard" data-label="Арифметика"></div>
+            </div>
+        </section>
+    </page>
+    <page pagetitle="Арифметика" id="page_arithmetic">
         <section>
-            <div class="pageBackgroundLayer">
+            <div class="backgroundLayer">
             </div>
             <div class="pageTextContent">
                 <div class="textBlock">
-                    Для перевода десятичного числа в любую другую систему его необходимо последовательно делить на число основания конечной системы счисления до тех пор, пока не останется остаток, который равен или меньше основания конечной системы. После этого нужно записать последовательность соответствующих последним результатам деления и остатков цифр в конечной системе в обратном порядке.
+                    Также в других системах счисления можно выполнять простейшие арифметические операции: сложение, вычитание, умножение и деление. В целом всё работает и происходит как в десятичной системе, но с одной особенностью: основание и алфавит системы отличаются, что стоит помнить, выполняя арифметические преобразования в этих случаях.
                 </div>
-                <div class="goToCard" onclick="goToPage('+')">
-                    <div class="goToCardText">Перевод</div>
-                    <div class="goToCardIconContainer">
-                        <div class="goToCardIconBackground"></div>
-                        <div class="goToCardIconSymbol">
-                            <icon>navigate_next</icon>
-                        </div>
-                    </div>
-                </div>
+            </div>
+            <div class="pageMediaContent" class="mediaContent_arithmeticExamples">
+                <div id="mediaContent_arithmeticExamples_addition"></div>
+                <div id="mediaContent_arithmeticExamples_subtraction"></div>
             </div>
         </section>
         <section>
-            <!-- КАЛЬКУЛЯТОР ПЛЮС -->
-            <!-- КАЛЬКУЛЯТОР МИНУС -->
-            <!-- КАЛЬКУЛЯТОР УМНОЖЕНИЕ -->
-            <!-- КАЛЬКУЛЯТОР ДЕЛЕНИЕ -->
-            <!-- СПЛИТ СКРИН? -->
-            <div class="pageBackgroundLayer">
+            <div class="backgroundLayer">
             </div>
             <div class="pageTextContent">
-                <div class="goToCard" onclick="goToPage('+')">
-                    <div class="goToCardText">Арифметика</div>
-                    <div class="goToCardIconContainer">
-                        <div class="goToCardIconBackground"></div>
-                        <div class="goToCardIconSymbol">
-                            <icon>navigate_next</icon>
-                        </div>
-                    </div>
+                <div class="textBlock">
+                    Также в других системах счисления можно выполнять простейшие арифметические операции: сложение, вычитание, умножение и деление. В целом всё работает и происходит как в десятичной системе, но с одной особенностью: основание и алфавит системы отличаются, что стоит помнить, выполняя арифметические преобразования в этих случаях.
                 </div>
+            </div>
+            <div class="pageMediaContent" class="mediaContent_arithmeticExamples">
+                <div id="mediaContent_arithmeticExamples_multiplication"></div>
+                <div id="mediaContent_arithmeticExamples_division"></div>
+            </div>
+        </section>
+        <section class="verticalSection" id="section_arithmeticCalculator">
+            <div class="backgroundLayer">
+            </div>
+            <div class="pageMediaContent">
+                <div class="mediaContainer calculatorContainer" id="mediaContent_arithmetic_container">
+                </div>
+            </div>
+            <div class="pageBottomContent">
+                <div class="textBlock">Это калькулятор, способный совершать четыре арифметические операции с числами в любой нужной системе счисления. Введите два числа, и на странице автоматически появится решение.</div>
+                <div class="goToCard" data-label="Примеры программ"></div>
             </div>
         </section>
     </page>
-    <page intitle="Примеры программ" id="page_codeExamples">
+    <page pagetitle="Примеры программ" id="page_codeExamples">
         <section>
-            <div class="pageBackgroundLayer">
+            <div class="backgroundLayer">
             </div>
             <div class="pageTextContent">
                 <div class="textBlock">
@@ -457,7 +502,7 @@
             </div>
         </section>
         <section>
-            <div class="pageBackgroundLayer">
+            <div class="backgroundLayer">
             </div>
             <div class="pageTextContent">
                 <div class="textBlock">
@@ -468,45 +513,55 @@
                         <li>Прибавить результат данной операции к общему результату и повторять это, пока не будут обработаны все цифры исходной формы.</li>
                     </ol>
                 </div>
-                <div class="goToCard" onclick="goToPage('+')">
-                    <div class="goToCardText">Система тестирования</div>
-                    <div class="goToCardIconContainer">
-                        <div class="goToCardIconBackground"></div>
-                        <div class="goToCardIconSymbol">
-                            <icon>navigate_next</icon>
-                        </div>
-                    </div>
-                </div>
+                <div class="goToCard" data-label="Система тестирования"></div>
             </div>
             <div class="pageMediaContent">
                 <div id="mediaConvert_codeExamples_Nto10"></div>
             </div>
         </section>
     </page>
-    <page intitle="Тесты" id="page_testSystem_home">
-        <div id="testSystem_home_mainContainer">
-            <div id="testSystem_home_leftContainer"></div>
-            <div id="testSystem_home_rightContainer">
-                <!--кол-во заданий-->
-                <!--сложность заданий-->
+    <page pagetitle="Тесты" id="page_testSystem_home" class="testSystemPage">
+        <section>
+            <div class="backgroundLayer"></div>
+            <div id="testSystem_home_mainContainer" class="testSystemMainContainer">
+                <div id="testSystem_home_leftContainer">
+                    <h3>История</h3>
+                    <div id="testSystem_home_history"></div>
+                </div>
+                <div id="testSystem_home_rightContainer">
+                    <h3>Новый тест</h3>
+                    <div id="testSystem_home_rightQuestionCountContainer">
+                        <div id="testSystem_home_rightQuestionCountLabel">Вопросов</div>
+                        <div id="testSystem_home_rightQuestionCountIndicator">8</div>
+                        <input type="range" min="5" max="15" value="8" id="testSystem_home_rightQuestionCountSlider"></input>
+                    </div>
+                    <button id="testSystem_home_startButton" class="testSystem_mainButton">Начать</button>
+                </div>
             </div>
-        </div>
+        </section>
     </page>
-    <page intitle="Тесты" id="page_testSystem_progress">
-        <div id="testSystem_progress_mainContainer">
-            <div id="testSystem_progress_headerContainer">
-                <div id="testSystem_progress_header_questionButtons" class="roundButtonStrip"></div>
-                <progress id="testSystem_progress_header_progressBar"></progress>
-                <button id="testSystem_progress_header_closeButton"></button>
+    <page pagetitle="Тесты" id="page_testSystem_progress" class="testSystemPage" visible="false">
+        <section>
+            <div class="backgroundLayer"></div>
+            <div id="testSystem_progress_mainContainer" class="testSystemMainContainer">
+                <div id="testSystem_progress_headerContainer">
+                    <div id="testSystem_progress_header_topContainer">
+                        <progress id="testSystem_progress_header_progressBar"></progress>
+                        <button id="testSystem_progress_header_closeButton"><icon>close</icon></button>
+                    </div>
+                    <div id="testSystem_progress_header_questionButtons" class="roundButtonStrip"></div>
+                </div>
+                <div id="testSystem_progress_middleContainer">
+                    <div id="testSystem_progress_middle_questionText"></div>
+                    <div id="testSystem_progress_middle_answerInputContainer"></div>
+                    <div id="testSystem_progress_middle_solutionContainer"></div>
+                    <button id="testSystem_progress_answerSubmitButton" class="testSystem_mainButton">Ответить</button>
+                    <button id="testSystem_progress_endTestButton" class="testSystem_mainButton">Завершить тест</button>
+                </div>
             </div>
-            <div id="testSystem_progress_middleContainer">
-    
-            </div>
-            <div id="testSystem_progress_submitButton">
-    
-            </div>
-        </div>
+        </section>
     </page>
 </body>
+<script src="codeExamples.js"></script>
 <script src="script.js"></script>
 </html>
