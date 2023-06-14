@@ -1289,7 +1289,10 @@ table .lineLeft {
     box-sizing: border-box;
     width: 48px;
     height: 300px;
-    border-radius: 999px;
+    border-radius: 100px;
+}
+
+#mediaContent_unary1_container.revealed > div {
     animation: animation_history_unaryStick 1.5s ease;
 }
 
