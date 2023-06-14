@@ -62,6 +62,9 @@ function createNavbarLinks() {
 createNavbarLinks();
 
 function goToPage(index) {
+    if (index === '+') index = currentNormalPageIndex + 1;
+    else if (index === '-') index = currentNormalPageIndex - 1;
+    else index = parseInt(index);
     let navTempIndex = index;
     if (currentNavlink) {
         currentNavlink.classList.remove('navbar_linkCurrent');
@@ -77,8 +80,6 @@ function goToPage(index) {
         currentPage.classList.remove('page_current');
     }
     currentNormalPageIndex = parseInt(currentNormalPageIndex);
-    if (index === '+') index = currentNormalPageIndex + 1;
-    if (index === '-') index = currentNormalPageIndex - 1;
     currentPage = pageElements[index];
     currentNormalPageIndex = index;
     let progress = Math.round((index / (pageElements.length - 1)) * 100) / 100;
@@ -891,7 +892,8 @@ function createDragElement(innerContent) {
     function onPointerDown(event) {
         let innerX = 0, innerY = 0;
         let previousWidthValue;
-        dragMouseDown(event)
+        let offsetParent;
+        dragMouseDown(event);
 
         function dragMouseDown(event) {
             event.preventDefault();
@@ -899,23 +901,27 @@ function createDragElement(innerContent) {
                 let rect = element.getBoundingClientRect();
                 innerX = event.clientX - rect.left;
                 innerY = event.clientY - rect.top;
-            
+                offsetParent = element.offsetParent;
                 previousWidthValue = element.style.width;
                 element.style.width = element.offsetWidth + "px";
                 element.classList.add('draggableItem-dragging');
                 document.body.classList.add('dragging');
             
-                document.onpointerup = closeDragElement;
-                document.onpointermove = elementDrag;
+                //document.addEventListener('pointerup', (event) => closeDragElement(event));
+                //document.addEventListener('pointermove', (event) => elementDrag(event, element));
+                document.onpointerup = (event) => closeDragElement(event);
+                document.onpointermove = (event) => elementDrag(event, element);
 
-                elementDrag(event);
+                elementDrag(event, element);
             }
         }
     
-        function elementDrag(event) {
+        function elementDrag(event, el) {
             event.preventDefault();
-            element.style.top = event.pageY - innerY + "px";
-            element.style.left = event.pageX - innerX + "px";
+            let parent = offsetParent.getBoundingClientRect();
+            console.log(parent.top);
+            element.style.top = event.pageY - parent.top - innerY + "px";
+            element.style.left = event.pageX - parent.left  - innerX + "px";
         }
     
         function closeDragElement(event) {
@@ -1251,8 +1257,10 @@ function revealTick(pageElement) {
     elementArray.forEach(element => {
         let elementTop = element.getBoundingClientRect().top;
         if (elementTop < windowHeight - elementVisible) {
-            element.classList.add("revealed");
-            if (element.onReveal) element.onReveal();
+            if (!element.classList.contains("revealed")) {
+                element.classList.add("revealed");
+                if (element.onReveal) element.onReveal();
+            }
         } 
         else {
             element.classList.remove("revealed");

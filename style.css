@@ -107,7 +107,7 @@ ov {
     --color-codeExamples-main-dark: #663348;
 
     --color-testSystem-background: #ddffee;
-    --color-testSystem-main-light: #aaffee;
+    --color-testSystem-main-light: #b7ffee;
     --color-testSystem-main-dark: #116777;
 }
 
@@ -1547,16 +1547,20 @@ section#section_convertCalculator {
     animation: blink 2.5s ease forwards infinite;
 }
 
+
 .codeTabs_container {
     background: white;
     box-shadow: 0 4px 8px #0004;
     border-radius: 6px;
     padding: 8px;
-    width: 100%;
+    width: 90%;
     aspect-ratio: 3/4;
     display: flex;
     flex-direction: column;
     gap: 8px;
+    margin: 5%;
+    box-sizing: border-box;
+    max-height: 80vh;
 }
 
 .codeTabs_tabStrip {
@@ -1577,6 +1581,8 @@ section#section_convertCalculator {
     font-family: 'Courier New', Courier, monospace;
     padding: 16px 24px;
     outline: none;
+    border-radius: 6px;
+    border: solid 1px #444;
 }
 
 page.testSystemPage section {
@@ -1651,6 +1657,21 @@ page.testSystemPage .backgroundLayer {
 
 #testSystem_progress_header_questionButtons button.incorrectAnswer {
     background-color: #ff9688;
+}
+
+#testSystem_progress_header_progressBar {
+    appearance: none;
+	border-radius: 99px;
+	box-shadow: 0 2px 6px #0004;
+}
+
+#testSystem_progress_header_progressBar::-webkit-progress-bar {
+    background: var(--page-color-main-light);
+	border-radius: 99px;
+}
+
+#testSystem_progress_header_progressBar::-webkit-progress-value {
+	background: var(--page-color-main-dark);	border-radius: 99px;
 }
 
 
@@ -1827,19 +1848,19 @@ page.testSystemPage .backgroundLayer {
 
 
 section#historyExamples_egypt .backgroundLayer {
-    background: url(../assets/historyExamples/egypt2.jpg);
+    background: url(assets/historyExamples/egypt2.jpg);
     background-size: cover;
     background-position: center;
     opacity: 0.2;
 }
 
 section#historyExamples_rome .backgroundLayer {
-    background: url(/assets/historyExamples/rome.jpg);
+    background: url(assets/historyExamples/rome.jpg);
     background-repeat: repeat;
 }
 
 section#historyExamples_base60 .backgroundLayer {
-    background: url(/assets/historyExamples/base60.png);
+    background: url(assets/historyExamples/base60.png);
     background-size: cover;
     background-position: left center;
     opacity: 0.5;
@@ -2080,7 +2101,7 @@ section#historyExamples_base60 .backgroundLayer {
 }
 
 .draggableItem-dragging {
-	position: absolute !important;
+	position: fixed !important;
 	transition: none;
 	z-index: 30;
 	pointer-events: none;
@@ -2098,10 +2119,6 @@ section#historyExamples_base60 .backgroundLayer {
 /*
     Цифровые весы
 */
-
-#section_scalesMain {
-    max-height: 100%;
-}
 
 #section_scalesMain .pageBottomContent {
     height: auto;
