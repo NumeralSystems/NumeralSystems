@@ -102,19 +102,6 @@ window.onclick = (event) => {
     else if (!checkClickPath(event.target, navbar) || checkClickPath(event.target, navbar_header_closeButton)) document.body.classList.remove('navbarVisible')
 }
 
-/*
-
-                <div class="goToCard" onclick="goToPage('+')">
-                    <div class="goToCardText">Система тестирования</div>
-                    <div class="goToCardIconContainer">
-                        <div class="goToCardIconBackground"></div>
-                        <div class="goToCardIconSymbol">
-                            <icon>navigate_next</icon>
-                        </div>
-                    </div>
-                </div>
-*/
-
 function createNextPageCard(container) {
     container.innerHTML = `<div class="goToCardText">${container.getAttribute('data-label')}</div>
     <div class="goToCardIconContainer">
@@ -181,6 +168,10 @@ function generateHTMLContentForMarquee() {
     return titleBackground_tempString;
 }
 
+/*
+    Страница приветствия
+*/
+
 document.addEventListener("DOMContentLoaded", () => {
     [...document.querySelectorAll('.titleScreen_marqueeGroup')].forEach(element => element.innerHTML = generateHTMLContentForMarquee());
 });
@@ -203,6 +194,10 @@ titleScreen_startButton_button.addEventListener('click', () => {
         goToPage(1);
     }, 2500);
 });
+
+/*
+    Функции визуализации процесса перевода
+*/
 
 function getConversionVisualization_10toN(number, radix) {
     function division_getRemainders(number, divider) {
@@ -254,8 +249,6 @@ function getConversionVisualization_10toN(number, radix) {
         } else {
             tableElements[a + 2][a].innerHTML = remainder + `<div class="cornerOperationSymbol">=</div>`;
         }
-        //tableElements[a][a+1].classList.add("divisionCell_divider");
-        //tableElements[a][a].classList.add("divisionCell_result");
         tableElements[a + 2][a].classList.add("blink");
         let wholeSeconds = Math.floor((results.length-a) / 10);
         tableElements[a + 2][a].style.animationDelay = `${wholeSeconds}.${results.length - wholeSeconds * 10 - a}s`
@@ -302,6 +295,10 @@ function getConversionVisualization_Nto10(number, radix) {
     })
     return parentElement;
 }
+
+/*
+    Функции визуализации арифметических операций
+*/
 
 function getArithmeticVisualization_Addition(number1, number2, radix) {
     number1 = number1.toString();
@@ -394,7 +391,7 @@ function getArithmeticVisualization_Subtraction(number1, number2, radix) {
         }
         let subtractionDecimal = parseInt(currentDigit1, radix) - parseInt(currentDigit2, radix);
         if (subtractionDecimal < 0) {
-            tableElements[0][b - 1].innerText = "-1"; // + (Math.floor(additionDecimal / radix)).toString(radix);
+            tableElements[0][b - 1].innerText = "-1";
         }
     }
     rows[2].classList.add('arithmeticVisualization_borderBottom');
@@ -493,6 +490,10 @@ function getArithmeticVisualization_Division(number1, number2, radix) {
     return table;
 }
 
+/*
+    Страница "История появления"
+*/
+
 function updateMedia_unary() {
     if (!mediaContent_unary2_input.value) mediaContent_unary2_input.value = 0;
     let tempString = "";
@@ -521,6 +522,148 @@ function initMedia_unary() {
     updateMedia_unary();
 }
 initMedia_unary();
+
+/*
+    Страница "Исторические системы счисления"
+*/
+
+var mediaBase60_updateInterval;
+
+function initMedia_history_base60() {
+    let currentDate = new Date();
+    mediaBase60_updateInterval = setInterval(() => updateMedia_base60(), 50);
+    mediaContent_base60_gradientMillis.style.rotate = `${currentDate.getMilliseconds() / 1000 * 360}deg`;
+    mediaContent_base60_gradientSeconds.style.rotate = `${currentDate.getSeconds() / 60 * 360}deg`;
+    mediaContent_base60_gradientMinutes.style.rotate = `${currentDate.getMinutes() / 60 * 360}deg`;
+}
+
+function updateMedia_base60() {
+    let date = new Date();
+    let millis_second = date.getMilliseconds();
+    let millis_minute = date.getSeconds() * 1000 + millis_second;
+    let millis_hour = date.getMinutes() * 60 * 1000 + millis_minute;
+    let secondsString = date.getSeconds().toString() + "“";
+    let minutesString = date.getMinutes().toString() + "‘";
+    if (secondsString.length < 2) secondsString = "0" + secondsString;
+    if (minutesString.length < 2) minutesString = "0" + minutesString;
+    mediaContent_base60_textMillisTime.innerText = date.getMilliseconds();
+    mediaContent_base60_textMillisDegrees.innerText = Math.floor(millis_second / 1000 * 360 * 100) / 100 + "°";
+    mediaContent_base60_textSecondsTime.innerText = secondsString;
+    mediaContent_base60_textSecondsDegrees.innerText = Math.floor(millis_minute / 60000 * 360 * 100) / 100 + "°";
+    mediaContent_base60_textMinutesTime.innerText = minutesString;
+    mediaContent_base60_textMinutesDegrees.innerText = Math.floor(millis_hour / 3600000 * 360 * 100) / 100 + "°";
+}
+
+mediaContent_base60_container.onReveal = () => initMedia_history_base60();
+mediaContent_base60_container.onUnreveal = () => clearInterval(mediaBase60_updateInterval);
+
+
+function historyExamples_generateCardInfo_egypt() {
+    let descriptions = [
+        "Черта",
+        "Пятка или ручка корзины",
+        "Петля",
+        "Лотос",
+        "Палец",
+        "Личинка",
+        "Хех (божество)"
+    ];
+    let resultArray = [];
+    for (let i = 0; i < 7; i++) {
+        let currentNumber = Math.pow(10, i);
+        let currentObject = {
+            number: currentNumber,
+            leftHTML: `<img src="assets/historyExamples/egyptDigits/${currentNumber}.svg" alt="${currentNumber}"/>`,
+            description: descriptions[i]
+        }
+        resultArray.push(currentObject);
+    }
+    return resultArray;
+}
+
+function historyExamples_generateCardInfo_rome() {
+    let digits = [
+        [1, "I"],
+        [5, "V"],
+        [10, "X"],
+        [50, "L"],
+        [100, "C"],
+        [500, "D"],
+        [1000, "M"],
+        [5000, "<ov>V</ov>"],
+        [10000, "<ov>X</ov>"],
+        [50000, "<ov>L</ov>"],
+        [100000, "<ov>C</ov>"],
+        [500000, "<ov>D</ov>"],
+        [1000000, "<ov>M</ov>"],
+    ];
+    let resultArray = [];
+    for (let digit of digits) {
+        let currentObject = {
+            number: digit[0],
+            leftHTML: digit[1],
+            description: null
+        }
+        resultArray.push(currentObject);
+    }
+    return resultArray;
+}
+
+function historyExamples_createCards(cardObjectArray) {
+    let fragment = document.createDocumentFragment();
+    let leftSide = document.createElement('div');
+    leftSide.className = "mediaContent_history_cardsLeft";
+    let rightSide = document.createElement('div');
+    rightSide.className = "mediaContent_history_cardsRight";
+    let i = 0;
+    cardObjectArray.forEach(card => {
+        let currentContainer = document.createElement('div');
+        currentContainer.className = "mediaContent_history_card";
+
+        let leftElement = document.createElement('div');
+        leftElement.className = "mediaContent_history_card_left";
+        leftElement.innerHTML = card.leftHTML;
+        currentContainer.appendChild(leftElement);
+
+        let numberElement = document.createElement('div');
+        numberElement.className = "mediaContent_history_card_number";
+        numberElement.innerText = card.number;
+        currentContainer.appendChild(numberElement);
+
+        if (card.description) {
+            let descriptionElement = document.createElement('div');
+            descriptionElement.className = "mediaContent_history_card_description";
+            descriptionElement.innerHTML = card.description;
+            currentContainer.appendChild(descriptionElement);
+        }
+
+        if (i % 2 == 0) leftSide.appendChild(currentContainer);
+        else rightSide.appendChild(currentContainer);
+        i++;
+    });
+    fragment.appendChild(leftSide);
+    fragment.appendChild(rightSide);
+    return fragment;
+}
+
+function initMedia_history() {
+    mediaContent_egyptDigits.appendChild(historyExamples_createCards(historyExamples_generateCardInfo_egypt()));
+    mediaContent_romeDigits.appendChild(historyExamples_createCards(historyExamples_generateCardInfo_rome()));
+}
+
+initMedia_history();
+
+
+
+
+
+
+
+
+
+
+
+
 
 class NumberInputWidget {
 
@@ -569,7 +712,6 @@ class NumberInputWidget {
         this.input.id = idPrefix + "_input";
         this.input.className = classPrefix + "_input NumberInputWidget_input";
         this.input.setAttribute('type', 'text');
-        //this.input.setAttribute('maxDecimalValue', maxDecimalValue);
         this.inputCurrentBase = document.createElement("div");
         this.inputCurrentBase.id = idPrefix + "_inputCurrentBase";
         this.inputCurrentBase.className = classPrefix + "_inputCurrentBase NumberInputWidget_inputCurrentBase";
@@ -681,212 +823,111 @@ class MediaConvert {
         this.rightSide.onChange = () => _onChange(this.rightSide, this.leftSide);
         this.leftSide.onBaseChange = () => _onBaseChange(this.leftSide, this.rightSide);
         this.rightSide.onBaseChange = () => _onBaseChange(this.rightSide, this.leftSide);
-
-        //this.LeftContainer.className = "mediaContent_convert_container";
     }
 }
 
 var mediaConvert = new MediaConvert(mediaContent_convert_container);
 
-
-class MediaArithmetic {
-
-    updateBottom() {
-        this.bottomContainer.innerHTML = "";
-        this.bottomContainer.appendChild(this.currentOperationFunction(this.leftSide.input.value, this.rightSide.input.value, this.leftSide.currentBase));
-    }
-
-    updateOperationSelection(targetActiveElement) {
-        [...this.operationSelectionContainer.children].forEach(element => {
-            if (element == targetActiveElement) element.classList.add('active');
-            else element.classList.remove('active');
-        });
-    }
-
-    constructor(_containerElement) {
-        this.containerElement = _containerElement;
-        let baseArray = [];
-        for (let i = 2; i <= 36; i++) {
-            baseArray.push(i);
-        }
-        this.leftSide = new NumberInputWidgetWithBaseSelect("mediaContent_arithmetic_left", "calculatorContainer_left", baseArray, 8, 100000);
-        this.rightSide = new NumberInputWidget("mediaContent_arithmetic_right", "calculatorContainer_right", 8, 100000);
-        this.operationSelectionContainer = document.createElement('div');
-        this.operationSelectionContainer.id = "mediaContent_arithmetic_operationSelection_container";
-        this.operationSelectionContainer.className = "roundButtonStrip";
-        this.bottomContainer = document.createElement('div');
-        this.bottomContainer.id = "mediaContent_arithmetic_bottom_container";
-        this.bottomContainer.className = "calculator_bottomContainer";
-
-        let operations = [
-            { name: "Сложение", func: getArithmeticVisualization_Addition },
-            { name: "Вычитание", func: getArithmeticVisualization_Subtraction },
-            { name: "Умножение", func: getArithmeticVisualization_Multiplication },
-            { name: "Деление", func: getArithmeticVisualization_Division }
-        ];
-
-        operations.forEach(operationObject => {
-            let newButton = document.createElement('button');
-            newButton.textContent = operationObject.name;
-            newButton.addEventListener('click', () => {
-                mediaAdditionInstance.currentOperationFunction = operationObject.func;
-                this.updateOperationSelection(newButton);
-                this.updateBottom();
-            })
-            this.operationSelectionContainer.appendChild(newButton);
-        });
-
-        this.currentOperationFunction = operations[0].func;
-        this.updateOperationSelection(this.operationSelectionContainer.children[0]);
-
-        this.containerElement.appendChild(this.leftSide.container);
-        this.containerElement.appendChild(this.rightSide.container);
-        this.containerElement.appendChild(this.operationSelectionContainer);
-        this.containerElement.appendChild(this.bottomContainer);
-
-        let mediaAdditionInstance = this;
-        function _onBaseChange(widgetInstance, otherWidgetInstance) {
-        }
-        function _onChange(widgetInstance, otherWidgetInstance) {
-            mediaAdditionInstance.updateBottom();
-        }
-
-        this.leftSide.onChange = () => _onChange(this.leftSide, this.rightSide);
-        this.rightSide.onChange = () => _onChange(this.rightSide, this.leftSide);
-        this.leftSide.onBaseChange = () => this.rightSide.currentBase = this.leftSide.currentBase;
-
-        this.leftSide.input.value = 310;
-        this.rightSide.input.value = 240;
-        this.updateBottom();
-
-        //this.LeftContainer.className = "mediaContent_convert_container";
-    }
-}
-
-var mediaArithmetic = new MediaArithmetic(mediaContent_arithmetic_container);
-
 function horizontalScroll(event, target) {
     event.preventDefault();
     target.scrollLeft += event.deltaY * 0.5;
-    //target.scrollTo({left: target.scrollLeft + (event.deltaY*2), behavior: 'smooth'});
 }
 
-class CodeTabs {
-    updateSelectionButtons(targetActiveElement) {
-        [...this.tabStrip.children].forEach(element => {
-            if (element == targetActiveElement) element.classList.add('active');
-            else element.classList.remove('active');
+/*
+    Страница "Цифровые весы"
+*/
+
+class MediaScales {
+    update() {
+        let sum = 0;
+        this.rightSideSlots.forEach(slot => {
+            if (slot.children.length != 0) sum += parseInt(slot.children[0].innerText);
         });
-    }
-    constructor(containerElement, buildObject) {
-        this.containerElement = containerElement;
-        this.containerElement.classList.add('codeTabs_container');
-        this.tabStrip = document.createElement('div');
-        this.tabStrip.classList.add('codeTabs_tabStrip');
-        this.tabStrip.classList.add('roundButtonStrip');
-        this.textArea = document.createElement('textarea');
-        this.textArea.classList.add('codeTabs_textArea');
-
-        for (let entry of buildObject) {
-            let button = document.createElement('button');
-            button.innerText = entry.language;
-            button.addEventListener('click', () => {
-                this.textArea.value = entry.content;
-                this.updateSelectionButtons(button);
-            });
-            this.tabStrip.appendChild(button);
+        let newValue = (sum - parseInt(mediaScales_leftSide.input.value));
+        mediaContent_scales_deltaIndicator.innerText = Math.abs(newValue);
+        if (newValue == 0) {
+            mediaContent_scales_container.classList.remove('leftMore');
+            mediaContent_scales_container.classList.remove('rightMore');
+            mediaContent_scales_container.classList.add('equal');
         }
-        this.textArea.value = buildObject[0].content;
-        this.updateSelectionButtons(this.tabStrip.children[0]);
+        else if (newValue > 0) {
+            mediaContent_scales_container.classList.remove('leftMore');
+            mediaContent_scales_container.classList.add('rightMore');
+            mediaContent_scales_container.classList.remove('equal');
+        }
+        else if (newValue < 0) {
+            mediaContent_scales_container.classList.add('leftMore');
+            mediaContent_scales_container.classList.remove('rightMore');
+            mediaContent_scales_container.classList.remove('equal');
+        }
+        
+        let tempSum = sum;
+    
+        for (let i = 11; i >= 0; i--) {
+            let divisionResult = Math.floor(tempSum / Math.pow(2, i));
+            if (divisionResult != 0) {
+                this.tableMultiplierElements[11-i].innerText = 1;
+                tempSum -= divisionResult * Math.pow(2, i);
+            }
+            else {
+                this.tableMultiplierElements[11-i].innerText = 0;
+            }
+        }
+    }
+    constructor() {
+        let mediaContent_scales_dragItemBank = createDragElementSlot(12);
+        mediaContent_scales_dragItemBank.id = "mediaContent_scales_dragItemBank";
+        mediaContent_scales_container.appendChild(mediaContent_scales_dragItemBank);
+    
+        let bottomTableFragment = document.createDocumentFragment();
+        let tableRow1 = document.createElement('tr');
+        let tableRow2 = document.createElement('tr');
+        let tableRow3 = document.createElement('tr');
+        bottomTableFragment.appendChild(tableRow1);
+        bottomTableFragment.appendChild(tableRow2);
+        bottomTableFragment.appendChild(tableRow3);
 
-        this.containerElement.appendChild(this.tabStrip);
-        this.containerElement.appendChild(this.textArea);
+        this.rightSideSlots = [];
+        this.tableMultiplierElements = [];
+    
+        for (let i = 11; i >= 0 ; i--) {
+            let rightSideSlot = createDragElementSlot(1);
+            rightSideSlot.onChange = () => this.update();
+            mediaContent_scales_rightContainer.appendChild(rightSideSlot);
+            this.rightSideSlots.push(rightSideSlot);
+            let currentNumber = Math.pow(2, i);
+            let draggableItem = createDragElement(currentNumber);
+            mediaContent_scales_dragItemBank.appendChild(draggableItem);
+        
+            let cell1 = document.createElement('td');
+            cell1.innerHTML = `2<sup>${i}</sup>`;
+            tableRow1.appendChild(cell1);
+            let cell2 = document.createElement('td');
+            cell2.innerHTML = currentNumber;
+            tableRow2.appendChild(cell2);
+            let cell3 = document.createElement('td');
+            cell3.innerHTML = 0;
+            tableRow3.appendChild(cell3);
+            this.tableMultiplierElements.push(cell3);
+        }
+        mediaContent_scales_bottomTable.appendChild(bottomTableFragment);
+        
+        window.mediaScales_leftSide = new NumberInputWidget("mediaContent_scalesLeftWidget", "", [10], 10, 4000);
+        mediaScales_leftSide.input.value = 480;
+    
+        mediaContent_scales_leftContainer.appendChild(mediaScales_leftSide.container);
+    
+        mediaScales_leftSide.onChange = () => updateScales();
+    
+        this.update();
     }
 }
 
-let codeExamples_codeTabs_toN = new CodeTabs(mediaConvert_codeExamples_10toN, codeExamples.toN);
-let codeExamples_codeTabs_to10 = new CodeTabs(mediaConvert_codeExamples_Nto10, codeExamples.to10);
+var mediaScales = new MediaScales();
 
-var mediaBase60_updateInterval;
-
-function initMedia_history_base60() {
-    let currentDate = new Date();
-    mediaBase60_updateInterval = setInterval(() => updateMedia_base60(), 50);
-    mediaContent_base60_gradientMillis.style.rotate = `${currentDate.getMilliseconds() / 1000 * 360}deg`;
-    mediaContent_base60_gradientSeconds.style.rotate = `${currentDate.getSeconds() / 60 * 360}deg`;
-    mediaContent_base60_gradientMinutes.style.rotate = `${currentDate.getMinutes() / 60 * 360}deg`;
-}
-
-function updateMedia_base60() {
-    let date = new Date();
-    let millis_second = date.getMilliseconds();
-    let millis_minute = date.getSeconds() * 1000 + millis_second;
-    let millis_hour = date.getMinutes() * 60 * 1000 + millis_minute;
-    let secondsString = date.getSeconds().toString() + "“";
-    let minutesString = date.getMinutes().toString() + "‘";
-    if (secondsString.length < 2) secondsString = "0" + secondsString;
-    if (minutesString.length < 2) minutesString = "0" + minutesString;
-    mediaContent_base60_textMillisTime.innerText = date.getMilliseconds();
-    mediaContent_base60_textMillisDegrees.innerText = Math.floor(millis_second / 1000 * 360 * 100) / 100 + "°";
-    mediaContent_base60_textSecondsTime.innerText = secondsString;
-    mediaContent_base60_textSecondsDegrees.innerText = Math.floor(millis_minute / 60000 * 360 * 100) / 100 + "°";
-    mediaContent_base60_textMinutesTime.innerText = minutesString;
-    mediaContent_base60_textMinutesDegrees.innerText = Math.floor(millis_hour / 3600000 * 360 * 100) / 100 + "°";
-}
-
-mediaContent_base60_container.onReveal = () => initMedia_history_base60();
-mediaContent_base60_container.onUnreveal = () => clearInterval(mediaBase60_updateInterval);
-
-function initMedia_scales() {
-    let mediaContent_scales_dragItemBank = createDragElementSlot(12);
-    mediaContent_scales_dragItemBank.id = "mediaContent_scales_dragItemBank";
-    mediaContent_scales_container.appendChild(mediaContent_scales_dragItemBank);
-
-    let bottomTableFragment = document.createDocumentFragment();
-    let tableRow1 = document.createElement('tr');
-    let tableRow2 = document.createElement('tr');
-    let tableRow3 = document.createElement('tr');
-    bottomTableFragment.appendChild(tableRow1);
-    bottomTableFragment.appendChild(tableRow2);
-    bottomTableFragment.appendChild(tableRow3);
-
-    for (let i = 11; i >= 0 ; i--) {
-        let rightSideSlot = createDragElementSlot(1);
-        rightSideSlot.onChange = () => updateScales();
-        mediaContent_scales_rightContainer.appendChild(rightSideSlot);
-        let currentNumber = Math.pow(2, i);
-        let draggableItem = createDragElement(currentNumber);
-        mediaContent_scales_dragItemBank.appendChild(draggableItem);
-    
-        let cell1 = document.createElement('td');
-        cell1.innerHTML = `2<sup>${i}</sup>`;
-        tableRow1.appendChild(cell1);
-        let cell2 = document.createElement('td');
-        cell2.innerHTML = currentNumber;
-        tableRow2.appendChild(cell2);
-        let cell3 = document.createElement('td');
-        cell3.innerHTML = 0;
-        tableRow3.appendChild(cell3);
-    }
-    mediaContent_scales_bottomTable.appendChild(bottomTableFragment);
-    
-    window.mediaScales_leftSide = new NumberInputWidget("mediaContent_scalesLeftWidget", "", [10], 10, 4000);
-    mediaScales_leftSide.input.value = 480;
-
-    mediaContent_scales_leftContainer.appendChild(mediaScales_leftSide.container);
-
-    mediaScales_leftSide.onChange = () => updateScales();
-    mediaScales_leftSide.onBaseChange = () => {
-        let newMaxLength = 0;
-        if (value == 2) newMaxLength = 4;
-        else if (value == 8) newMaxLength = 4;
-        else if (value == 16) newMaxLength = 6;
-    };
-
-    updateScales();
-}
-initMedia_scales();
-
+/*
+    DragElement
+*/
 
 function createDragElement(innerContent) {
     function onPointerDown(event) {
@@ -906,9 +947,6 @@ function createDragElement(innerContent) {
                 element.style.width = element.offsetWidth + "px";
                 element.classList.add('draggableItem-dragging');
                 document.body.classList.add('dragging');
-            
-                //document.addEventListener('pointerup', (event) => closeDragElement(event));
-                //document.addEventListener('pointermove', (event) => elementDrag(event, element));
                 document.onpointerup = (event) => closeDragElement(event);
                 document.onpointermove = (event) => elementDrag(event, element);
 
@@ -980,138 +1018,83 @@ function createDragElementSlot(maxChildrenCount) {
     return element;
 }
 
-function updateScales() {
-    let sum = 0;
-    [...mediaContent_scales_rightContainer.getElementsByClassName("draggableItemSlot")].forEach(slot => {
-        if (slot.children.length != 0) sum += parseInt(slot.children[0].innerText);
-    });
-    let newValue = (sum - parseInt(mediaScales_leftSide.input.value));
-    mediaContent_scales_deltaIndicator.innerText = Math.abs(newValue);
-    if (newValue == 0) {
-        mediaContent_scales_container.classList.remove('leftMore');
-        mediaContent_scales_container.classList.remove('rightMore');
-        mediaContent_scales_container.classList.add('equal');
-    }
-    else if (newValue > 0) {
-        mediaContent_scales_container.classList.remove('leftMore');
-        mediaContent_scales_container.classList.add('rightMore');
-        mediaContent_scales_container.classList.remove('equal');
-    }
-    else if (newValue < 0) {
-        mediaContent_scales_container.classList.add('leftMore');
-        mediaContent_scales_container.classList.remove('rightMore');
-        mediaContent_scales_container.classList.remove('equal');
-    }
-    
-    let tempSum = sum;
+/*
+    Страница "Арифметика"
+*/
 
-    for (let i = 11; i >= 0; i--) {
-        let divisionResult = Math.floor(tempSum / Math.pow(2, i));
-        if (divisionResult != 0) {
-            mediaContent_scales_bottomTable.children[2].children[11-i].innerText = 1;
-            tempSum -= divisionResult * Math.pow(2, i);
+class MediaArithmetic {
+
+    updateBottom() {
+        this.bottomContainer.innerHTML = "";
+        this.bottomContainer.appendChild(this.currentOperationFunction(this.leftSide.input.value, this.rightSide.input.value, this.leftSide.currentBase));
+    }
+
+    updateOperationSelection(targetActiveElement) {
+        [...this.operationSelectionContainer.children].forEach(element => {
+            if (element == targetActiveElement) element.classList.add('active');
+            else element.classList.remove('active');
+        });
+    }
+
+    constructor(_containerElement) {
+        this.containerElement = _containerElement;
+        let baseArray = [];
+        for (let i = 2; i <= 36; i++) {
+            baseArray.push(i);
         }
-        else {
-            mediaContent_scales_bottomTable.children[2].children[11-i].innerText = 0;
+        this.leftSide = new NumberInputWidgetWithBaseSelect("mediaContent_arithmetic_left", "calculatorContainer_left", baseArray, 8, 100000);
+        this.rightSide = new NumberInputWidget("mediaContent_arithmetic_right", "calculatorContainer_right", 8, 100000);
+        this.operationSelectionContainer = document.createElement('div');
+        this.operationSelectionContainer.id = "mediaContent_arithmetic_operationSelection_container";
+        this.operationSelectionContainer.className = "roundButtonStrip";
+        this.bottomContainer = document.createElement('div');
+        this.bottomContainer.id = "mediaContent_arithmetic_bottom_container";
+        this.bottomContainer.className = "calculator_bottomContainer";
+
+        let operations = [
+            { name: "Сложение", func: getArithmeticVisualization_Addition },
+            { name: "Вычитание", func: getArithmeticVisualization_Subtraction },
+            { name: "Умножение", func: getArithmeticVisualization_Multiplication },
+            { name: "Деление", func: getArithmeticVisualization_Division }
+        ];
+
+        operations.forEach(operationObject => {
+            let newButton = document.createElement('button');
+            newButton.textContent = operationObject.name;
+            newButton.addEventListener('click', () => {
+                mediaAdditionInstance.currentOperationFunction = operationObject.func;
+                this.updateOperationSelection(newButton);
+                this.updateBottom();
+            })
+            this.operationSelectionContainer.appendChild(newButton);
+        });
+
+        this.currentOperationFunction = operations[0].func;
+        this.updateOperationSelection(this.operationSelectionContainer.children[0]);
+
+        this.containerElement.appendChild(this.leftSide.container);
+        this.containerElement.appendChild(this.rightSide.container);
+        this.containerElement.appendChild(this.operationSelectionContainer);
+        this.containerElement.appendChild(this.bottomContainer);
+
+        let mediaAdditionInstance = this;
+        function _onBaseChange(widgetInstance, otherWidgetInstance) {
         }
+        function _onChange(widgetInstance, otherWidgetInstance) {
+            mediaAdditionInstance.updateBottom();
+        }
+
+        this.leftSide.onChange = () => _onChange(this.leftSide, this.rightSide);
+        this.rightSide.onChange = () => _onChange(this.rightSide, this.leftSide);
+        this.leftSide.onBaseChange = () => this.rightSide.currentBase = this.leftSide.currentBase;
+
+        this.leftSide.input.value = 310;
+        this.rightSide.input.value = 240;
+        this.updateBottom();
     }
 }
 
-function historyExamples_generateCardInfo_egypt() {
-    let descriptions = [
-        "Черта",
-        "Пятка или ручка корзины",
-        "Петля",
-        "Лотос",
-        "Палец",
-        "Личинка",
-        "Хех (божество)"
-    ];
-    let resultArray = [];
-    for (let i = 0; i < 7; i++) {
-        let currentNumber = Math.pow(10, i);
-        let currentObject = {
-            number: currentNumber,
-            leftHTML: `<img src="assets/historyExamples/egyptDigits/${currentNumber}.svg" alt="${currentNumber}"/>`,
-            description: descriptions[i]
-        }
-        resultArray.push(currentObject);
-    }
-    return resultArray;
-}
-
-function historyExamples_generateCardInfo_rome() {
-    let digits = [
-        [1, "I"],
-        [5, "V"],
-        [10, "X"],
-        [50, "L"],
-        [100, "C"],
-        [500, "D"],
-        [1000, "M"],
-        [5000, "<ov>V</ov>"],
-        [10000, "<ov>X</ov>"],
-        [50000, "<ov>L</ov>"],
-        [100000, "<ov>C</ov>"],
-        [500000, "<ov>D</ov>"],
-        [1000000, "<ov>M</ov>"],
-    ];
-    let resultArray = [];
-    for (let digit of digits) {
-        let currentObject = {
-            number: digit[0],
-            leftHTML: digit[1],
-            description: null
-        }
-        resultArray.push(currentObject);
-    }
-    return resultArray;
-}
-
-function historyExamples_createCards(cardObjectArray) {
-    let fragment = document.createDocumentFragment();
-    let leftSide = document.createElement('div');
-    leftSide.className = "mediaContent_history_cardsLeft";
-    let rightSide = document.createElement('div');
-    rightSide.className = "mediaContent_history_cardsRight";
-    let i = 0;
-    cardObjectArray.forEach(card => {
-        let currentContainer = document.createElement('div');
-        currentContainer.className = "mediaContent_history_card";
-
-        let leftElement = document.createElement('div');
-        leftElement.className = "mediaContent_history_card_left";
-        leftElement.innerHTML = card.leftHTML;
-        currentContainer.appendChild(leftElement);
-
-        let numberElement = document.createElement('div');
-        numberElement.className = "mediaContent_history_card_number";
-        numberElement.innerText = card.number;
-        currentContainer.appendChild(numberElement);
-
-        if (card.description) {
-            let descriptionElement = document.createElement('div');
-            descriptionElement.className = "mediaContent_history_card_description";
-            descriptionElement.innerHTML = card.description;
-            currentContainer.appendChild(descriptionElement);
-        }
-
-        if (i % 2 == 0) leftSide.appendChild(currentContainer);
-        else rightSide.appendChild(currentContainer);
-        i++;
-    });
-    fragment.appendChild(leftSide);
-    fragment.appendChild(rightSide);
-    return fragment;
-}
-
-function initMedia_history() {
-    mediaContent_egyptDigits.appendChild(historyExamples_createCards(historyExamples_generateCardInfo_egypt()));
-    mediaContent_romeDigits.appendChild(historyExamples_createCards(historyExamples_generateCardInfo_rome()));
-}
-
-initMedia_history();
-
+var mediaArithmetic = new MediaArithmetic(mediaContent_arithmetic_container);
 
 mediaContent_arithmeticExamples_addition.appendChild(getArithmeticVisualization_Addition('100101', '1101', 2));
 mediaContent_arithmeticExamples_subtraction.appendChild(getArithmeticVisualization_Subtraction('2a6', '48', 16));
@@ -1119,7 +1102,7 @@ mediaContent_arithmeticExamples_multiplication.appendChild(getArithmeticVisualiz
 mediaContent_arithmeticExamples_division.appendChild(getArithmeticVisualization_Division('6420', '12', 8));
 
 /*
-    Элементы для страницы "СС в информатике"
+    Страница "СС в информатике"
 */
 
 function initMedia_computerExamples_binary() {
@@ -1245,6 +1228,46 @@ function initMedia_computerExamples() {
     initMedia_hexadecimalColor();
 }
 initMedia_computerExamples();
+
+/*
+    Страница "Примеры программ"
+*/
+
+class CodeTabs {
+    updateSelectionButtons(targetActiveElement) {
+        [...this.tabStrip.children].forEach(element => {
+            if (element == targetActiveElement) element.classList.add('active');
+            else element.classList.remove('active');
+        });
+    }
+    constructor(containerElement, buildObject) {
+        this.containerElement = containerElement;
+        this.containerElement.classList.add('codeTabs_container');
+        this.tabStrip = document.createElement('div');
+        this.tabStrip.classList.add('codeTabs_tabStrip');
+        this.tabStrip.classList.add('roundButtonStrip');
+        this.textArea = document.createElement('textarea');
+        this.textArea.classList.add('codeTabs_textArea');
+
+        for (let entry of buildObject) {
+            let button = document.createElement('button');
+            button.innerText = entry.language;
+            button.addEventListener('click', () => {
+                this.textArea.value = entry.content;
+                this.updateSelectionButtons(button);
+            });
+            this.tabStrip.appendChild(button);
+        }
+        this.textArea.value = buildObject[0].content;
+        this.updateSelectionButtons(this.tabStrip.children[0]);
+
+        this.containerElement.appendChild(this.tabStrip);
+        this.containerElement.appendChild(this.textArea);
+    }
+}
+
+let codeExamples_codeTabs_toN = new CodeTabs(mediaConvert_codeExamples_10toN, codeExamples.toN);
+let codeExamples_codeTabs_to10 = new CodeTabs(mediaConvert_codeExamples_Nto10, codeExamples.to10);
 
 /*
     Появление элементов на странице

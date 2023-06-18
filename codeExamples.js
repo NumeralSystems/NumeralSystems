@@ -73,30 +73,30 @@ let codeExamples = {
     {
       language: "PascalABC.net",
       content: `
-const digits:string[36] = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-var input:string;
-var base:integer;
+        const digits:string[36] = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        var input:string;
+        var base:integer;
 
-function convert_toBaseN(number:integer; base:integer) : string;
-var i, c: integer;
-var res: string;
-begin
-res := ''; // Результат
-while (number > 0) do
-begin
-res := digits[(number mod base) + 1] + res; // Получить цифру и добавить её в начало строки
-number := number div base; // Уменьшить число
-end;
-convert_toBaseN := res;
-end;
+        function convert_toBaseN(number:integer; base:integer) : string;
+        var i, c: integer;
+        var res: string;
+        begin
+        res := ''; // Результат
+        while (number > 0) do
+        begin
+        res := digits[(number mod base) + 1] + res; // Получить цифру и добавить её в начало строки
+        number := number div base; // Уменьшить число
+        end;
+        convert_toBaseN := res;
+        end;
 
-begin
-print('Число в десятичной системе:');
-readln(input);
-print('Основание нужной системы:');
-readln(base);
-println(convert_toBaseN(integer.Parse(input), base));
-end.`,
+        begin
+        print('Число в десятичной системе:');
+        readln(input);
+        print('Основание нужной системы:');
+        readln(base);
+        println(convert_toBaseN(integer.Parse(input), base));
+        end.`,
     }
   ]
-}
+};

@@ -359,9 +359,6 @@ body.testInProgress #navOpenButton {
     overflow: hidden;
 }
 
-#navbar_links .navbar_link_text {
-}
-
 #navbar_links .navbar_link_indicator {
     background: #57f;
     width: 14px;
@@ -1289,7 +1286,7 @@ table .lineLeft {
     box-sizing: border-box;
     width: 48px;
     height: 300px;
-    border-radius: 100px;
+    border-radius: 99px;
 }
 
 #mediaContent_unary1_container.revealed > div {
@@ -2493,10 +2490,6 @@ page#page_computerExamples table {
     Калькулятор: арифметика
 */
 
-
-#section_arithmeticCalculator {
-    
-}
 
 #mediaContent_arithmetic_container {
     grid-template-columns: 1fr 1fr;
